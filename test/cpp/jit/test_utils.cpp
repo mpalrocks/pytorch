@@ -258,7 +258,7 @@ RegisterOperators reg({
     // because it always produces empty Tensors.
     Operator(
         "prim::MakeTestTensor() -> Tensor",
-        [](Stack* stack) { push(stack, at::Tensor()); },
+        [](Stack& stack) { push(stack, at::Tensor()); },
         aliasAnalysisFromSchema()),
 });
 } // namespace
