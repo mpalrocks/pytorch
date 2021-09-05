@@ -316,7 +316,7 @@ def _str_intern(inp):
     _default_complex_dtype = torch.cdouble if torch.get_default_dtype() == torch.double else torch.cfloat
     has_default_dtype = self.dtype in (torch.get_default_dtype(), _default_complex_dtype, torch.int64, torch.bool)
     if self.is_sparse:
-        suffixes.append('size=' + str(tuple(self.shape)))
+        #suffixes.append('size=' + str(tuple(self.shape)))
         suffixes.append('nnz=' + str(self._nnz()))
         if not has_default_dtype:
             suffixes.append('dtype=' + str(self.dtype))
@@ -332,7 +332,7 @@ def _str_intern(inp):
             values_str += ', size=' + str(tuple(values.shape))
         tensor_str = indices_prefix + indices_str + '),\n' + ' ' * indent + values_prefix + values_str + ')'
     elif self.is_sparse_csr:
-        suffixes.append('size=' + str(tuple(self.shape)))
+        #suffixes.append('size=' + str(tuple(self.shape)))
         suffixes.append('nnz=' + str(self._nnz()))
         if not has_default_dtype:
             suffixes.append('dtype=' + str(self.dtype))
@@ -355,7 +355,7 @@ def _str_intern(inp):
             col_indices_prefix + col_indices_str + '),\n' + ' ' * indent +\
             values_prefix + values_str + ')'
     elif self.is_quantized:
-        suffixes.append('size=' + str(tuple(self.shape)))
+        #suffixes.append('size=' + str(tuple(self.shape)))
         if not has_default_dtype:
             suffixes.append('dtype=' + str(self.dtype))
         suffixes.append('quantization_scheme=' + str(self.qscheme()))
@@ -370,7 +370,7 @@ def _str_intern(inp):
         tensor_str = _tensor_str(self.dequantize(), indent)
     else:
         if self.is_meta:
-            suffixes.append('size=' + str(tuple(self.shape)))
+            #suffixes.append('size=' + str(tuple(self.shape)))
             if self.dtype != torch.get_default_dtype():
                 suffixes.append('dtype=' + str(self.dtype))
             # TODO: This implies that ellipses is valid syntax for allocating
@@ -379,8 +379,8 @@ def _str_intern(inp):
         else:
             if self.numel() == 0 and not self.is_sparse:
                 # Explicitly print the shape if it is not (0,), to match NumPy behavior
-                if self.dim() != 1:
-                    suffixes.append('size=' + str(tuple(self.shape)))
+                #if self.dim() != 1:
+                    #suffixes.append('size=' + str(tuple(self.shape)))
 
                 # In an empty tensor, there are no elements to infer if the dtype
                 # should be int64, so it must be shown explicitly.
